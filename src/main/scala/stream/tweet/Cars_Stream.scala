@@ -8,16 +8,15 @@ import twitter4j._
 
 object auth{
   val config = new twitter4j.conf.ConfigurationBuilder()
-    .setOAuthConsumerKey("JNWGw9aBnVMYO2O29KDeg1AOH")
-    .setOAuthConsumerSecret("8Dtm62H6Ditso7I7wOb7dAppQNlOc25jDA3yy0flxPIl0I33on")
-    .setOAuthAccessToken("109191571-lqLrCsRDicYJxqx5fDEWcbHE8TUmPGzW7BPXdEok")
-    .setOAuthAccessTokenSecret("2qGJVYSoYR2sZ5WSCfmZhTD6KSRP0iSfrKHP464l4vQvm")
+    .setOAuthConsumerKey("")
+    .setOAuthConsumerSecret("")
+    .setOAuthAccessToken("")
+    .setOAuthAccessTokenSecret("")
     .build
   val twitter_auth = new TwitterFactory(auth.config)
   val a = new twitter4j.auth.OAuthAuthorization(auth.config)
   val atwitter =  twitter_auth.getInstance(a).getAuthorization()
 }
-
 
 
 object Cars_Stream {
@@ -29,8 +28,9 @@ object Cars_Stream {
 
     val st = TwitterUtils.createStream(ssc,Some(auth.atwitter),filter)
 
-    val test = st.flatMap(x => x.getText.split(" "))
-
+    val hashTags = st.flatMap(x => x.getText.split(" ").filter(_.startsWith("#")))
+    val top_10 = hashTags.map((_,1)).reduceByKeyAndWindow(_+_, Seconds(60))
+      .map{case (topic,count)=> (count,topic)}.transform(_.sortByKey(false))
   }
 
 }
