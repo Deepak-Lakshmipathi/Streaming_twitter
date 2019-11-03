@@ -6,7 +6,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import twitter4j._
 
-class auth(val cK: String,val cSK: String, val aT: String, val aST: String) {
+class auth1(val cK: String,val cSK: String, val aT: String, val aST: String) {
   val config = new twitter4j.conf.ConfigurationBuilder()
     .setOAuthConsumerKey(cK)
     .setOAuthConsumerSecret(cSK)
@@ -27,13 +27,13 @@ object Cars_Stream {
       System.exit(1)
     }
 
-    val auth = new auth(args(0),args(1),args(2),args(3))
+    val auth2 = new auth1(args(0),args(1),args(2),args(3))
     val filter: Array[String] = Array("Cars")
     val Session1 = SparkSession.builder().appName("Streaming_test").getOrCreate()
     val conf = new SparkConf().setAppName("Streaming_test")
     val ssc = new StreamingContext(conf,Seconds(10))
 
-    val st = TwitterUtils.createStream(ssc,Some(auth.atwitter),filter)
+    val st = TwitterUtils.createStream(ssc,Some(auth2.atwitter),filter)
 
     val hashTags = st.flatMap(x => x.getText.split(" ").filter(_.startsWith("#")))
     val top_10 = hashTags.map((_,1)).reduceByKeyAndWindow(_+_, Seconds(10))
