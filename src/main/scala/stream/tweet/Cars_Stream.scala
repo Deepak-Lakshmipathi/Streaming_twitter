@@ -44,6 +44,10 @@ object Cars_Stream {
       println("number of topics (%s total):".format(rdd.count()))
       top_List.foreach{case (count,tag)=> println("Hashtag :%s(%s tweets)".format(tag,count))}
     })
+
+
+    ssc.start()
+    ssc.awaitTermination()
   }
 
 }
