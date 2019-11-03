@@ -20,5 +20,8 @@ libraryDependencies += "org.apache.spark" %% "spark-streaming" % "2.4.4" % "prov
 // spark-streaming-twitter
 libraryDependencies += "org.apache.spark" %% "spark-streaming-twitter" % "1.6.3"
 
-// https://mvnrepository.com/artifact/org.twitter4j/twitter4j-stream
+// twitter4j-core
+libraryDependencies += "org.twitter4j" % "twitter4j-core" % "4.0.7"
+
+// twitter4j-stream
 libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.7"

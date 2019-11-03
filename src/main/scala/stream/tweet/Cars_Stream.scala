@@ -1,12 +1,18 @@
 package stream.tweet
 
-import org.apache.spark.streaming.{Seconds,StreamingContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.twitter._
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import twitter4j._
+import twitter4j.auth.Authorization
 
 class auth1(val cK: String,val cSK: String, val aT: String, val aST: String) {
+  val auth = new Authorization {
+    override def getAuthorizationHeader(req: HttpRequest): String = ???
+
+    override def isEnabled: Boolean = ???
+  }
   val config = new twitter4j.conf.ConfigurationBuilder()
     .setOAuthConsumerKey(cK)
     .setOAuthConsumerSecret(cSK)
