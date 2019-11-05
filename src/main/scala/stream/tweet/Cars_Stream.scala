@@ -34,7 +34,7 @@ object Cars_Stream {
       System.exit(1)
     }
 
-    val cK,cS,aT,aTS = args.take(4)
+    val Array(cK,cS,aT,aTS) = args.take(4)
 
     System.setProperty("twitter4j.oauth.consumerKey",cK)
     System.setProperty("twitter4j.oauth.consumerSecret",cS)
