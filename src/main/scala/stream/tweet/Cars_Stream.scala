@@ -45,8 +45,8 @@ object Cars_Stream {
     //val auth2 = new auth1(args(0),args(1),args(2),args(3))
     val filter: Array[String] = Array("Cars")
     val Session1 = SparkSession.builder().appName("Streaming_test").getOrCreate()
-    val conf = new SparkConf().setAppName("Streaming_test")
-    val ssc = new StreamingContext(conf,Seconds(10))
+    //val conf = new SparkConf().setAppName("Streaming_test")
+    val ssc = new StreamingContext(Session1.sparkContext,Seconds(10))
 
     val st = TwitterUtils.createStream(ssc,None,filter)
 
