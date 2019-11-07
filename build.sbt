@@ -24,4 +24,4 @@ libraryDependencies += "org.apache.spark" %% "spark-streaming-twitter" % "1.6.3"
 libraryDependencies += "org.twitter4j" % "twitter4j-core" % "4.0.7"
 
 // twitter4j-stream
-//libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.7"
+libraryDependencies += "org.twitter4j" % "twitter4j-stream" % "4.0.7"
